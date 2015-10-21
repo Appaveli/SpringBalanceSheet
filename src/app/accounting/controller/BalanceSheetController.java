@@ -44,7 +44,7 @@ public class BalanceSheetController {
 	}
 	@RequestMapping(method=RequestMethod.POST, value ="/searchbalancesheet")
 	public ModelAndView searchBalanceSheet(@ModelAttribute("balancesheet") BalanceSheet bs,
-	BindingResult bindingResult,ModelMap model){
+	                                       BindingResult bindingResult,ModelMap model){
 		List <BalanceSheet> balancesheet = null;
 		balancesheet = balanceSheetDao.viewBalanceSheet(bs.getId());
 		model.addAttribute("balancesheet",balancesheet);
@@ -53,7 +53,7 @@ public class BalanceSheetController {
 	}
 	@RequestMapping(method=RequestMethod.POST, value="/balancesheet")
 	public ModelAndView insertBalanceSheet( @ModelAttribute("balancesheet") BalanceSheet balancesheet,
-			BindingResult bindingResult,ModelMap model){
+			                                BindingResult bindingResult,ModelMap model){
 		    balanceSheetDao.insertData(balancesheet);
 			return new ModelAndView("balancesheet", "command", balancesheet);
 		
