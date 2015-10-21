@@ -48,57 +48,14 @@ public class BalanceSheetController {
 		List <BalanceSheet> balancesheet = null;
 		balancesheet = balanceSheetDao.viewBalanceSheet(bs.getId());
 		model.addAttribute("balancesheet",balancesheet);
-		
 		return new ModelAndView("balanceresult","command", balancesheet);
 		
 	}
 	@RequestMapping(method=RequestMethod.POST, value="/balancesheet")
-	public ModelAndView insertBalanceSheet( @ModelAttribute("balancesheet") BalanceSheet bs,
+	public ModelAndView insertBalanceSheet( @ModelAttribute("balancesheet") BalanceSheet balancesheet,
 			BindingResult bindingResult,ModelMap model){
-		BalanceSheet balancesheet = new BalanceSheet();;
-	
-		double cash = bs.getCash();
-		double accountsreceivable = bs.getAccountsReceivable();
-		double prepaid = bs.getPrepaidExpenses();
-		double inventory = bs.getInventory();
-		double totalcurrentliabilities = cash + accountsreceivable+prepaid+inventory;
-		double property = bs.getProperty();
-		double accumdepre = bs.getAccumDepre();
-		double netfixedassets = property + accumdepre;
-		double totalassets = totalcurrentliabilities + netfixedassets;
-		double accountspayable = bs.getAccountsPayable();
-		double accuredexpenses = bs.getAccuredExpenses();
-		double portiondebt = bs.getPortionDebt();
-		double taxpayable = bs.getTaxPayable();
-		double currentliabilities = accountspayable + accuredexpenses + portiondebt + taxpayable;
-		double capitalstock = bs.getCapitalStock();
-		double retainedearnings = bs.getRetainedEarnings();
-		double stockholdersequity = capitalstock + retainedearnings;
-		double totalliabilitiesstock = currentliabilities + stockholdersequity;
-		
-		balancesheet.setCash(cash);
-		balancesheet.setAccountsReceivable(accountsreceivable);
-		balancesheet.setPrepaidExpenses(prepaid);
-		balancesheet.setInventory(inventory);
-		balancesheet.setTotalCurrentAssets(totalcurrentliabilities);
-		balancesheet.setProperty(property);
-		balancesheet.setAccumDepre(accumdepre);
-		balancesheet.setNetFixedAssets(netfixedassets);
-		balancesheet.setTotalAssets(totalassets);
-		balancesheet.setAccountsPayable(accountspayable);
-		balancesheet.setAccuredExpenses(accuredexpenses);
-		balancesheet.setPortionDebt(portiondebt);
-		balancesheet.setTaxPayable(taxpayable);
-		balancesheet.setCurrentLiabilities(currentliabilities);
-		balancesheet.setCapitalStock(capitalstock);
-		balancesheet.setRetainedEarnings(retainedearnings);
-		balancesheet.setStockholdersEquity(stockholdersequity);
-		balancesheet.setTotalLiabilities(totalliabilitiesstock);
-		
-		balanceSheetDao.insertData(balancesheet);
-	
-		
-				return new ModelAndView("balancesheet", "command", balancesheet);
+		    balanceSheetDao.insertData(balancesheet);
+			return new ModelAndView("balancesheet", "command", balancesheet);
 		
 	}
 }
